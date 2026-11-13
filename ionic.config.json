@@ -1,0 +1,7 @@
+{
+  "name": "Demo Capacitor Local Notifications",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
