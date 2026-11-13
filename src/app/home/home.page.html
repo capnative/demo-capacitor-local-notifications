@@ -1,21 +1,57 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Blank </ion-title>
+    <ion-title>Local Notifications</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Local Notifications</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>
-      Start with Ionic
-      <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a>
-    </p>
+    @if (!native) {
+    <p>This plugin runs on iOS and Android. In a browser, each call reports that it is unavailable.</p>
+    } @if (latest(); as latest) {
+    <div class="latest" [class]="latest.status" role="status">
+      <span class="name">{{ latest.title }}</span>
+      <span class="detail">{{ latest.detail }}</span>
+    </div>
+    }
+
+    <h2>Permissions</h2>
+    <ion-button expand="block" type="button" (click)="checkPermissions()" [disabled]="busy()"
+      >Check permissions</ion-button
+    >
+    <ion-button expand="block" type="button" (click)="requestPermissions()" [disabled]="busy()">
+      Request permissions
+    </ion-button>
+
+    <h2>Schedule</h2>
+    <ion-button expand="block" type="button" (click)="scheduleNow()" [disabled]="busy()">Schedule now</ion-button>
+    <ion-button expand="block" type="button" (click)="scheduleLater()" [disabled]="busy()">
+      Schedule in 15 seconds
+    </ion-button>
+    <ion-button expand="block" type="button" (click)="scheduleRepeating()" [disabled]="busy()">
+      Schedule in 90 seconds, then every 90 seconds
+    </ion-button>
+    <ion-button expand="block" type="button" (click)="scheduleEveryMinute()" [disabled]="busy()">
+      Schedule every minute
+    </ion-button>
+
+    <h2>Pending</h2>
+    <ion-button expand="block" type="button" (click)="getPending()" [disabled]="busy()">Get pending</ion-button>
+
+    <h2>Cancel</h2>
+    <ion-button expand="block" type="button" color="danger" (click)="cancelAll()" [disabled]="busy()">
+      Cancel all
+    </ion-button>
+
+    <h2>Delivered</h2>
+    <ion-button expand="block" type="button" color="danger" (click)="removeAllDelivered()" [disabled]="busy()">
+      Remove all delivered
+    </ion-button>
   </div>
 </ion-content>

@@ -16,4 +16,22 @@ describe('HomePage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('shows one button per plugin action', () => {
+    const labels = [...fixture.nativeElement.querySelectorAll('ion-button')].map((button: HTMLElement) =>
+      button.textContent?.replace(/\s+/g, ' ').trim(),
+    );
+
+    expect(labels).toEqual([
+      'Check permissions',
+      'Request permissions',
+      'Schedule now',
+      'Schedule in 15 seconds',
+      'Schedule in 90 seconds, then every 90 seconds',
+      'Schedule every minute',
+      'Get pending',
+      'Cancel all',
+      'Remove all delivered',
+    ]);
+  });
 });

@@ -23,6 +23,10 @@ log.txt
 /platforms
 /plugins
 
+# Capacitor native projects
+/android
+/ios
+
 # Compiled output
 /dist
 /tmp
